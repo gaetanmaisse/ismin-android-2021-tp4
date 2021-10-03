@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateBookActivity">
+    tools:context=".CreateBookFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -25,7 +25,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/a_create_book_edt_author"
+                    android:id="@+id/f_create_book_edt_author"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:hint="Author"
@@ -38,7 +38,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/a_create_book_edt_title"
+                    android:id="@+id/f_create_book_edt_title"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:hint="Title"
@@ -50,7 +50,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/a_create_book_edt_date"
+                    android:id="@+id/f_create_book_edt_date"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:hint="Date"
@@ -58,7 +58,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/a_create_book_btn_save"
+                android:id="@+id/f_create_book_btn_save"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -67,4 +67,6 @@
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
