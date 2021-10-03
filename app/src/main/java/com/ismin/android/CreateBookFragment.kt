@@ -1,10 +1,12 @@
 package com.ismin.android
 
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.BounceInterpolator
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
@@ -30,6 +32,19 @@ class CreateBookFragment : Fragment() {
         rootView.findViewById<Button>(R.id.f_create_book_btn_save).setOnClickListener {
             saveBook()
         }
+
+        ObjectAnimator.ofFloat(
+            rootView.findViewById(R.id.f_create_book_lyt_form_container),
+            "translationY",
+            600f,
+            0f
+        )
+            .apply {
+                interpolator = BounceInterpolator()
+                duration = 700
+                start()
+            }
+
 
         return rootView
     }

@@ -7,6 +7,7 @@
     tools:context=".CreateBookFragment">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/f_create_book_lyt_form_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
