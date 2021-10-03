@@ -9,8 +9,6 @@ import android.view.MenuItem
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
@@ -18,22 +16,39 @@ class MainActivity : AppCompatActivity() {
     private val TAG = MainActivity::class.java.simpleName
 
     private val bookshelf = Bookshelf()
-    private val adapter = BookAdapter(bookshelf.getAllBooks())
+    private val theLordOfTheRings = Book(
+        title = "The Lord of the Rings",
+        author = "J. R. R. Tolkien",
+        date = "1954-02-15"
+    )
+
+    private val theHobbit = Book(
+        title = "The Hobbit",
+        author = "J. R. R. Tolkien",
+        date = "1937-09-21"
+    )
+    private val aLaRechercheDuTempsPerdu = Book(
+        title = "À la recherche du temps perdu",
+        author = "Marcel Proust",
+        date = "1927"
+    )
 
     private val startForResult = registerForActivityResult(StartActivityForResult()) { result: ActivityResult ->
         if (result.resultCode == Activity.RESULT_OK) {
             val book = result.data?.getSerializableExtra(BOOK_TO_CREATE_KEY) as Book
             bookshelf.addBook(book);
             Log.d(TAG, "Number of books:" + bookshelf.getTotalNumberOfBooks())
-
-            adapter.refreshData(bookshelf.getAllBooks())
-            adapter.notifyDataSetChanged();
+            displayBookList()
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        bookshelf.addBook(theLordOfTheRings)
+        bookshelf.addBook(theHobbit)
+        bookshelf.addBook(aLaRechercheDuTempsPerdu)
 
         val btnCreateBook = findViewById<FloatingActionButton>(R.id.a_main_btn_create_book)
 
@@ -42,9 +57,14 @@ class MainActivity : AppCompatActivity() {
             startForResult.launch(intent)
         }
 
-        val rcvBooks = findViewById<RecyclerView>(R.id.a_main_rcv_books)
-        rcvBooks.layoutManager = LinearLayoutManager(this)
-        rcvBooks.adapter = adapter
+        displayBookList()
+    }
+
+    private fun displayBookList() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val fragment = BookListFragment.newInstance(bookshelf.getAllBooks())
+        fragmentTransaction.replace(R.id.a_main_lyt_fragment_container, fragment)
+        fragmentTransaction.commit()
     }
 
 
@@ -58,8 +78,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.main_menu_delete -> {
                 bookshelf.clear()
-                adapter.refreshData(bookshelf.getAllBooks())
-                adapter.notifyDataSetChanged();
+                displayBookList()
                 true
             }
             // If we got here, the user's action was not recognized.
