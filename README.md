@@ -20,7 +20,7 @@ Then:
 - Do the same for all RecyclerView related logic
 
 In `MainActivity`:
-- Add a `<RelativeLayout>` in the layout
+- Add a `<ConstraintLayout>` in the layout
 - Add some code to create a `BookListFragment` fragment and display it
 
 Then:
